@@ -1,0 +1,10 @@
+---
+packages:
+  - nginx
+  - python3
+  - python3-venv
+  - python3-pip
+apt_cache_valid_time: 3600
+app_dir: /opt/flask_app
+app_file: app.py
+app_port: 8000

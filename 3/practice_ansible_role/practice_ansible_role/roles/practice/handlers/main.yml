@@ -1,0 +1,21 @@
+---
+- name: daemon-reload systemd
+  become: true
+  command: systemctl daemon-reload
+  listen: daemon-reload
+
+- name: restart flask app
+  become: true
+  systemd:
+    name: "{{ app_file | regex_replace('\\..*$', '') }}"
+    state: restarted
+    enabled: true
+  listen: restart-flask
+
+- name: restart nginx
+  become: true
+  systemd:
+    name: nginx
+    state: restarted
+    enabled: true
+  listen: restart-nginx

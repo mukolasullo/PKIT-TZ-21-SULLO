@@ -1,0 +1,5 @@
+[Unit]
+Description=My Timer Service
+
+[Service]
+ExecStart=/usr/bin/bash -c '/usr/bin/echo "My Timer Service ran at $(date)" >> ~/mytimer.log'

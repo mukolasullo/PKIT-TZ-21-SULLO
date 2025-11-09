@@ -1,0 +1,7 @@
+---
+galaxy_info:
+  author: karina
+  description: Deploy a simple Flask app behind nginx with systemd service.
+  license: MIT
+  min_ansible_version: 2.9
+dependencies: []

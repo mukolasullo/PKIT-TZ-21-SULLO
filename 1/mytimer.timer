@@ -1,0 +1,10 @@
+[Unit]
+Description=Run My Timer Service every 10 seconds after boot
+
+[Timer]
+OnBootSec=10
+OnUnitActiveSec=10
+Unit=mytimer.service
+
+[Install]
+WantedBy=timers.target

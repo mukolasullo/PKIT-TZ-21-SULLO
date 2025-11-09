@@ -1,0 +1,27 @@
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Stop and disable flask service (if exists)
+      systemd:
+        name: "{{ item }}"
+        state: stopped
+        enabled: false
+      loop:
+        - "{{ lookup('vars', 'app_file') | default('app.py') | regex_replace('\\..*$', '') }}"
+      ignore_errors: true
+
+    - name: Remove systemd unit
+      file:
+        path: "/etc/systemd/system/{{ lookup('vars','app_file') | default('app.py') | regex_replace('\\..*$','') }}.service"
+        state: absent
+      ignore_errors: true
+
+    - name: Remove app directory
+      file:
+        path: "{{ lookup('vars','app_dir') | default('/opt/flask_app') }}"
+        state: absent
+      ignore_errors: true
+
+    - name: Reload systemd
+      command: systemctl daemon-reload
+      ignore_errors: true

@@ -1,0 +1,16 @@
+[Unit]
+Description=Flask App Service for {{ app_file }}
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory={{ app_dir }}
+Environment="PORT={{ app_port }}"
+ExecStart={{ app_dir }}/venv/bin/python {{ app_dir }}/{{ app_file }}
+Restart=on-failure
+RestartSec=5
+User=www-data
+Group=www-data
+
+[Install]
+WantedBy=multi-user.target
